@@ -1,6 +1,4 @@
 <?php
-//ini_set('display_errors', 1);
-date_default_timezone_set("Asia/Taipei");
 include_once('class.redis.php');
 include_once('../conf/redis_connect.php');
 //建立 redis 簡單連線
