@@ -46,6 +46,7 @@ class php_redis{
 	private $connection='';//連線
 	private $debug=false;//debug 模式
   private $db_mysql = '';//對應的mysql資料庫
+  private $redis_multi = 0;//對應的mysql資料庫
 	private $error_code=array(
 		 'no_conn'		=>0
 		,'conn_ok'		=>1
@@ -109,6 +110,14 @@ class php_redis{
     $this->status_text = "Authorization failed !";
 		return $this->status_code;
 	}
+	function chg_redis_db(){
+		$db=$this->db;
+		$this -> link -> SELECT($db);
+	}
+	//啟動交易模式
+	function php_redis_multi(){
+		$this->link->multi(Redis::MULTI);
+	}
 	//將value存入 某個key
 	/*
 		相同 key 會被覆蓋 
@@ -117,9 +126,8 @@ class php_redis{
 	*/
 	function php_redis_set($key,$val){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
-		$this->link->set($key,$val);
+		$result=$this->link->set($key,$val);
+		return $result;
 	}
 	//取得 某個key 的value
 	/*
@@ -129,10 +137,12 @@ class php_redis{
 			$result=結果
 	*/
 	function php_redis_get($key){
+    if($this->debug==true){echo "[php_redis_get]\n";}
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
+    if($this->debug==true){echo "php_redis_chk_status()\n";}
 		$result=$this->link->get($key);
+    if($this->debug==true){echo "get()\n";}        
+    if($this->debug==true){echo "[/php_redis_get]\n";}
 		return $result;
 	}
 	//執行刪除 某個key 的value
@@ -142,9 +152,8 @@ class php_redis{
 	*/
 	function php_redis_del($key){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
-		$this->link->del($key);
+		$result=$this->link->del($key);
+		return $result;
 	}
 	//設置 key 生存時間
 	/*
@@ -190,7 +199,7 @@ class php_redis{
 		$aData['update_time']=date('Y-m-d H:i:s');
 		$sKey=implode('#',$aKeys);
 		$json=json_encode($aData,true);
-		$this->php_redis_set($sKey,$json);
+		$sRet=$this->php_redis_set($sKey,$json);
 		return $sRet;
 	}
 	//取出redis 
@@ -245,7 +254,7 @@ class php_redis{
 		$aTmp['table']=$sTable;
 		$aKeys=array_merge($aTmp,$aWhere);
 		$sKey=implode('#',$aKeys);
-		$this->php_redis_del($sKey);
+		$sRet=$this->php_redis_del($sKey);
 		return $sRet;
 	}
 		//取得某個key 的列表
@@ -258,38 +267,32 @@ class php_redis{
 	*/
 	function php_redis_lrange($key,$start,$end){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
 		$result=$this->link->lrange($key,$start,$end);
 		return $result;
 	}
 	//将一个值value插入到列表key的表头，不存在就创建 
 	function php_redis_rpush($key,$val){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
-		$this->link->rpush($key,$val);
+		$result=$this->link->rpush($key,$val);
+		return $result;
 	}
 	//将一个值value插入到列表key的表头，不存在就创建 
 	function php_redis_lpush($key,$val){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
-		$this->link->lpush($key,$val);
+		$result=$this->link->lpush($key,$val);
+		return $result;
 	}
 	//改，从表头数，将列表key下标为第index的元素的值为new_v
 	function php_redis_lset($key,$index,$new_v){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
-		$this->link->lset($key,$index,$new_v);
+		$result=$this->link->lset($key,$index,$new_v);
+		return $result;
 	}
 	//查，返回列表key中，下标为index的元素
 	function php_redis_lindex($key,$index){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
-		$this->link->lindex($key,$index);
+		$result=$this->link->lindex($key,$index);
+		return $result;
 	}
 	// 解構子
 	function __destruct(){
@@ -313,6 +316,9 @@ function mke_redis_link($db_set){
 	//有設密碼的機器 設定這個欄位不能是空的 否則不會去做驗證
 	if($db_set['pass']!='' || !isset($db_set['pass'])){
 		$redis->php_redis_auth($db_set['pass']);
+	}
+	if($db_set['db_rds']!=0 || $db_set['db_rds']!=''){
+		$redis->chg_redis_db();
 	}
 	return $redis;
 }

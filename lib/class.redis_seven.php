@@ -109,6 +109,15 @@ class php_redis{
     $this->status_text = "Authorization failed !";
 		return $this->status_code;
 	}
+	//切換redis db
+	function chg_redis_db(){
+		$db=$this->db;
+		$this -> link -> SELECT($db);
+	}
+	//啟動交易模式
+	function php_redis_multi(){
+		$this->link->multi(Redis::MULTI);
+	}
 	//將value存入 某個key
 	/*
 		相同 key 會被覆蓋 
@@ -117,9 +126,8 @@ class php_redis{
 	*/
 	function php_redis_set($key,$val){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
-		$this->link->set($key,$val);
+		$result=$this->link->set($key,$val);
+		return $result;
 	}
 	//取得 某個key 的value
 	/*
@@ -130,8 +138,6 @@ class php_redis{
 	*/
 	function php_redis_get($key){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
 		$result=$this->link->get($key);
 		return $result;
 	}
@@ -142,9 +148,8 @@ class php_redis{
 	*/
 	function php_redis_del($key){
 		$this->php_redis_chk_status();
-		$db=$this->db;
-		$this -> link -> SELECT($db);
-		$this->link->del($key);
+		$result=$this->link->del($key);
+		return $result;
 	}
 	//設置 key 生存時間
 	/*
@@ -190,7 +195,7 @@ class php_redis{
 		$aData['update_time']=date('Y-m-d H:i:s');
 		$sKey=implode('#',$aKeys);
 		$json=json_encode($aData,true);
-		$this->php_redis_set($sKey,$json);
+		$sRet=$this->php_redis_set($sKey,$json);
 		return $sRet;
 	}
 	//取出redis 
@@ -245,7 +250,7 @@ class php_redis{
 		$aTmp['table']=$sTable;
 		$aKeys=array_merge($aTmp,$aWhere);
 		$sKey=implode('#',$aKeys);
-		$this->php_redis_del($sKey);
+		$sRet=$this->php_redis_del($sKey);
 		return $sRet;
 	}
 	// 解構子
@@ -270,6 +275,9 @@ function mke_redis_link($db_set){
 	//有設密碼的機器 設定這個欄位不能是空的 否則不會去做驗證
 	if($db_set['pass']!='' || !isset($db_set['pass'])){
 		$redis->php_redis_auth($db_set['pass']);
+	}
+	if($db_set['db_rds']!=0 || $db_set['db_rds']!=''){
+		$redis->chg_redis_db();
 	}
 	return $redis;
 }
