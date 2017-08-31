@@ -93,9 +93,9 @@ function test_fork_redis_set(){
 	}
 }
 function test_fork_redis_get(){
-		$max=6;
+	global $redis;
+	$max=6;
 	$chk_time=10000;
-	//$pipe=$redis->php_redis_multi();
 	for($i=1;$i<=$max;$i++){
 		$key="bet_".$i;
 		$pipe=$redis->php_redis_get($key);
@@ -135,9 +135,6 @@ function test_fork_redis_get(){
 		}
 		exit(0);
 	}
-	
-	//$sRet=$pipe->exec();
-	//print_r($sRet);
 }
 //
 function test_fork_redis_del(){
