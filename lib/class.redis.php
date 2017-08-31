@@ -30,13 +30,19 @@
      $host=主機位置
     ,$port=連線POST
     ,$db
-		redis=new php_redis($host,$port,$db)
+		redis=new php_redis($host,$port,$db_redis,$db_mysql)
 		有設密碼 的話 否則不會跑
    	redis->php_redis_auth($passowd);
+		切換資料庫 
+   	redis->chg_redis_db();
 		塞資料進 redis 要傳 key 跟 val
 		redis->php_redis_set($key,$val);
 		取資料 傳key 進去 回傳資料
 		redis->php_redis_get($key);
+		使用交易
+		$redis->php_redis_multi(); //交易開始
+		$redis_cmds=$redis->php_redis_set($key,val); //交易內的行為 set get del ....之類
+		$result=$redis_cmds->exec(); //送出交易 內的行為 並回傳結果
 */
 class php_redis{
 	private $host='';//主機

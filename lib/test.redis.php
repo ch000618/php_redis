@@ -183,19 +183,19 @@ function test_fork_redis_del(){
 function test_multi_redis_get(){
 	global $redis;
 	$max=6;
-	$pipe=$redis->php_redis_multi();
+	$redis->php_redis_multi();
 	for($i=1;$i<=$max;$i++){
 		$key="bet_".$i;
-		$pipe=$redis->php_redis_get($key);
+		$pipes=$redis->php_redis_get($key);
 	}
-	$aRet=$pipe->exec();
+	$aRet=$pipes->exec();
 	print_r($aRet);
 }
 //
 function test_multi_redis_set(){
 	global $redis;
 	$max=6;
-	$pipe=$redis->php_redis_multi();
+	$redis->php_redis_multi();
 	for($i=1;$i<=$max;$i++){
 		$key="bet_".$i;
 		$hset=array(
@@ -203,19 +203,19 @@ function test_multi_redis_set(){
 			,'time'=>date('Y-m-d H:i:s')
 		);
 		$json=json_encode($hset);
-		$pipe=$redis->php_redis_set($key,$json);
+		$pipes=$redis->php_redis_set($key,$json);
 	}
-	$aRet=$pipe->exec();
+	$aRet=$pipes->exec();
 	print_r($aRet);
 }
 //
 function test_multi_redis_del(){
 	global $redis;
 	$max=6;
-	$pipe=$redis->php_redis_multi();
+	$redis->php_redis_multi();
 	for($i=1;$i<=$max;$i++){
 		$key="bet_".$i;
-		$pipe=$redis->php_redis_del($key);
+		$pipes=$redis->php_redis_del($key);
 	}
 	$aRet=$pipe->exec();
 	print_r($aRet);
