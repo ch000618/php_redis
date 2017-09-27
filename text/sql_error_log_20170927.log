@@ -1,0 +1,474 @@
+
+[2017-09-27 15:59:52]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( 1 ,2 ,3 ,4 ,5 ,10 )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:01:34]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( "1" ,"2" ,"3" ,"4" ,"5" ,"10" )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:01:35]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( "1" ,"2" ,"3" ,"4" ,"5" ,"10" )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:16:23]
+SQL : INSERT INTO test2 ( "mmid" ,"scid" ,"coid" ,"said" ,"agid" ,"gold" ) VALUES ( "1" ,"2" ,"3" ,"4" ,"5" ,"10" )
+42000 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"mmid" ,"scid" ,"coid" ,"said" ,"agid" ,"gold" ) VALUES ( "1" ,"2" ,"3" ,"4" ,"5' at line 1
+Exception:{"errorInfo":["42000",1064,"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\"mmid\" ,\"scid\" ,\"coid\" ,\"said\" ,\"agid\" ,\"gold\" ) VALUES ( \"1\" ,\"2\" ,\"3\" ,\"4\" ,\"5' at line 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:16:25]
+SQL : INSERT INTO test2 ( "mmid" ,"scid" ,"coid" ,"said" ,"agid" ,"gold" ) VALUES ( "1" ,"2" ,"3" ,"4" ,"5" ,"10" )
+42000 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"mmid" ,"scid" ,"coid" ,"said" ,"agid" ,"gold" ) VALUES ( "1" ,"2" ,"3" ,"4" ,"5' at line 1
+Exception:{"errorInfo":["42000",1064,"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\"mmid\" ,\"scid\" ,\"coid\" ,\"said\" ,\"agid\" ,\"gold\" ) VALUES ( \"1\" ,\"2\" ,\"3\" ,\"4\" ,\"5' at line 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:16:30]
+SQL : INSERT INTO test2 ( "mmid" ,"scid" ,"coid" ,"said" ,"agid" ,"gold" ) VALUES ( "1" ,"2" ,"3" ,"4" ,"5" ,"10" )
+42000 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"mmid" ,"scid" ,"coid" ,"said" ,"agid" ,"gold" ) VALUES ( "1" ,"2" ,"3" ,"4" ,"5' at line 1
+Exception:{"errorInfo":["42000",1064,"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\"mmid\" ,\"scid\" ,\"coid\" ,\"said\" ,\"agid\" ,\"gold\" ) VALUES ( \"1\" ,\"2\" ,\"3\" ,\"4\" ,\"5' at line 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:20:39]
+SQL : INSERT INTO test2 ( 'mmid' ,'scid' ,'coid' ,'said' ,'agid' ,'gold' ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''mmid' ,'scid' ,'coid' ,'said' ,'agid' ,'gold' ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' at line 1
+Exception:{"errorInfo":["42000",1064,"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''mmid' ,'scid' ,'coid' ,'said' ,'agid' ,'gold' ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' at line 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:23:30]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:23:31]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:31:02]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:32:39]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:32:40]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:34:59]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:37:16]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:39:03]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 52 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:43:38]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 53 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:46:07]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 53 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:46:08]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 53 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:50:12]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 53 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 16:57:53]
+SQL : INSERT INTO test2 ( mmid ,scid ,coid ,said ,agid ,gold ) VALUES ( '1' ,'2' ,'3' ,'4' ,'5' ,'10' )
+42000 1142 INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'
+Exception:{"errorInfo":["42000",1142,"INSERT command denied to user 'fst_rst_w'@'localhost' for table 'test2'"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 53 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : INSERT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 17:26:32]
+SQL : SELECT * FROM test2 WHERE 1 mmid ="1"
+42000 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mmid ="1"' at line 1
+Exception:{"errorInfo":["42000",1064,"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mmid =\"1\"' at line 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 35 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 13 	  function : SELECT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 17:26:33]
+SQL : SELECT * FROM test2 WHERE 1 mmid ="1"
+42000 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mmid ="1"' at line 1
+Exception:{"errorInfo":["42000",1064,"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mmid =\"1\"' at line 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 35 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 13 	  function : SELECT_test2 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 20:01:10]
+SQL : SELECT ptype ,item ,SUM(gold) AS total ,COUNT(gold) AS cnt FROM test2 force index(mm_gold) WHERE 1 AND bet_status ="N" AND result_status ="U" AND mmid ="1" AND rpt_date ="2017-09-27" AND ptype ="100"
+42000 1140 In aggregated query without GROUP BY, expression #2 of SELECT list contains nonaggregated column 'test.test2.item'; this is incompatible with sql_mode=only_full_group_by
+Exception:{"errorInfo":["42000",1140,"In aggregated query without GROUP BY, expression #2 of SELECT list contains nonaggregated column 'test.test2.item'; this is incompatible with sql_mode=only_full_group_by"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 47 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : SELECT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 20:01:25]
+SQL : SELECT ptype ,item ,gold ,COUNT(gold) AS cnt FROM test2 force index(mm_gold) WHERE 1 AND bet_status ="N" AND result_status ="U" AND mmid ="1" AND rpt_date ="2017-09-27" AND ptype ="100"
+42000 1140 In aggregated query without GROUP BY, expression #2 of SELECT list contains nonaggregated column 'test.test2.item'; this is incompatible with sql_mode=only_full_group_by
+Exception:{"errorInfo":["42000",1140,"In aggregated query without GROUP BY, expression #2 of SELECT list contains nonaggregated column 'test.test2.item'; this is incompatible with sql_mode=only_full_group_by"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 47 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 14 	  function : SELECT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 22:14:44]
+SQL : INSERT INTO draws_ssc_bet (bet_status,result_status,id_bm,id_mm,id_sc,id_co,id_sa,id_ag,id_mem,order_ip,time_bet,time_bet_ms,rpt_date,date_sn,ptype,item_type,item,even_code,gold,odds_set,odds_basis,odds_gap,odds_adjust,odds_adjust_auto,odds_adjust_auto_rep,share_mm,share_sc,share_co,share_sa,share_ag,water_basis,water_gap_mm,water_gap_sc,water_gap_co,water_gap_sa,water_gap_ag,water_gap_mem,share_gold_mm,share_gold_sc,share_gold_co,share_gold_sa,share_gold_ag,share_gold_mm_out,share_gold_sc_out,share_gold_co_out,share_gold_sa_out,share_gold_ag_out,share_gold_mm_in,share_gold_sc_in,share_gold_co_in,share_gold_sa_in,share_gold_ag_in,water_gold_mm,water_gold_sc,water_gold_co,water_gold_sa,water_gold_ag,water_gold_mem,win_gold_mem) VALUES('N','U','','1','2','3','4','5','6','127.0.0.1','2017-09-27 22:14:44','200','2017-09-27','1','100','I','1','','100','A','9.911','0','0','0','0','20','15','25','20','20','85','0','2','','4','5','','2000','1500','2500','2000','2000','0','0','0','0','0','0','0','0','0','0','','','','','','','99.11')
+00000  
+Exception:{"errorInfo":["HY000",1366,"Incorrect integer value: '' for column 'id_bm' at row 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 134 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 325 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 18 	  function : INSERT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 22:18:14]
+SQL : INSERT INTO draws_ssc_bet (bet_status,result_status,id_bm,id_mm,id_sc,id_co,id_sa,id_ag,id_mem,order_ip,time_bet,time_bet_ms,rpt_date,date_sn,ptype,item_type,item,even_code,gold,odds_set,odds_basis,odds_gap,odds_adjust,odds_adjust_auto,odds_adjust_auto_rep,share_mm,share_sc,share_co,share_sa,share_ag,water_basis,water_gap_mm,water_gap_sc,water_gap_co,water_gap_sa,water_gap_ag,water_gap_mem,share_gold_mm,share_gold_sc,share_gold_co,share_gold_sa,share_gold_ag,share_gold_mm_out,share_gold_sc_out,share_gold_co_out,share_gold_sa_out,share_gold_ag_out,share_gold_mm_in,share_gold_sc_in,share_gold_co_in,share_gold_sa_in,share_gold_ag_in,water_gold_mm,water_gold_sc,water_gold_co,water_gold_sa,water_gold_ag,water_gold_mem,win_gold_mem) VALUES('N','U','','1','2','3','4','5','6','127.0.0.1','2017-09-27 22:18:14','200','2017-09-27','1','100','I','1','','100','A','9.911','0','0','0','0','20','15','25','20','20','85','0','2','','4','5','','2000','1500','2500','2000','2000','0','0','0','0','0','0','0','0','0','0','','','','','','','99.11')
+00000  
+Exception:{"errorInfo":["HY000",1366,"Incorrect integer value: '' for column 'id_bm' at row 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 134 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 325 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 18 	  function : INSERT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 22:18:53]
+SQL : INSERT INTO draws_ssc_bet (bet_status,result_status,id_bm,id_mm,id_sc,id_co,id_sa,id_ag,id_mem,order_ip,time_bet,time_bet_ms,rpt_date,date_sn,ptype,item_type,item,even_code,gold,odds_set,odds_basis,odds_gap,odds_adjust,odds_adjust_auto,odds_adjust_auto_rep,share_mm,share_sc,share_co,share_sa,share_ag,water_basis,water_gap_mm,water_gap_sc,water_gap_co,water_gap_sa,water_gap_ag,water_gap_mem,share_gold_mm,share_gold_sc,share_gold_co,share_gold_sa,share_gold_ag,share_gold_mm_out,share_gold_sc_out,share_gold_co_out,share_gold_sa_out,share_gold_ag_out,share_gold_mm_in,share_gold_sc_in,share_gold_co_in,share_gold_sa_in,share_gold_ag_in,water_gold_mm,water_gold_sc,water_gold_co,water_gold_sa,water_gold_ag,water_gold_mem,win_gold_mem) VALUES('N','U','','1','2','3','4','5','6','127.0.0.1','2017-09-27 22:18:53','200','2017-09-27','1','100','I','1','','100','A','9.911','0','0','0','0','20','15','25','20','20','85','0','2','','4','5','','2000','1500','2500','2000','2000','0','0','0','0','0','0','0','0','0','0','','','','','','','99.11')
+00000  
+Exception:{"errorInfo":["HY000",1366,"Incorrect integer value: '' for column 'id_bm' at row 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 134 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 326 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 18 	  function : INSERT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 22:25:13]
+SQL : INSERT INTO draws_ssc_bet (bet_status,result_status,id_bm,id_mm,id_sc,id_co,id_sa,id_ag,id_mem,order_ip,time_bet,time_bet_ms,rpt_date,date_sn,ptype,item_type,item,even_code,gold,odds_set,odds_basis,odds_gap,odds_adjust,odds_adjust_auto,odds_adjust_auto_rep,share_mm,share_sc,share_co,share_sa,share_ag,water_basis,water_gap_mm,water_gap_sc,water_gap_co,water_gap_sa,water_gap_ag,water_gap_mem,share_gold_mm,share_gold_sc,share_gold_co,share_gold_sa,share_gold_ag,share_gold_mm_out,share_gold_sc_out,share_gold_co_out,share_gold_sa_out,share_gold_ag_out,share_gold_mm_in,share_gold_sc_in,share_gold_co_in,share_gold_sa_in,share_gold_ag_in,water_gold_mm,water_gold_sc,water_gold_co,water_gold_sa,water_gold_ag,water_gold_mem,win_gold_mem) VALUES('N','U','','1','2','3','4','5','6','127.0.0.1','2017-09-27 22:25:13','200','2017-09-27','1','100','I','1','','100','A','9.911','0','0','0','0','20','15','25','20','20','85','0','2','','4','5','','2000','1500','2500','2000','2000','0','0','0','0','0','0','0','0','0','0','','','','','','','99.11')
+00000  
+Exception:{"errorInfo":["HY000",1366,"Incorrect integer value: '' for column 'id_bm' at row 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 134 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 326 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 18 	  function : INSERT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 22:25:21]
+SQL : INSERT INTO draws_ssc_bet (bet_status,result_status,id_bm,id_mm,id_sc,id_co,id_sa,id_ag,id_mem,order_ip,time_bet,time_bet_ms,rpt_date,date_sn,ptype,item_type,item,even_code,gold,odds_set,odds_basis,odds_gap,odds_adjust,odds_adjust_auto,odds_adjust_auto_rep,share_mm,share_sc,share_co,share_sa,share_ag,water_basis,water_gap_mm,water_gap_sc,water_gap_co,water_gap_sa,water_gap_ag,water_gap_mem,share_gold_mm,share_gold_sc,share_gold_co,share_gold_sa,share_gold_ag,share_gold_mm_out,share_gold_sc_out,share_gold_co_out,share_gold_sa_out,share_gold_ag_out,share_gold_mm_in,share_gold_sc_in,share_gold_co_in,share_gold_sa_in,share_gold_ag_in,water_gold_mm,water_gold_sc,water_gold_co,water_gold_sa,water_gold_ag,water_gold_mem,win_gold_mem) VALUES('N','U','','1','2','3','4','5','6','127.0.0.1','2017-09-27 22:25:21','200','2017-09-27','1','100','I','1','','100','A','9.911','0','0','0','0','20','15','25','20','20','85','0','2','','4','5','','2000','1500','2500','2000','2000','0','0','0','0','0','0','0','0','0','0','','','','','','','99.11')
+00000  
+Exception:{"errorInfo":["HY000",1366,"Incorrect integer value: '' for column 'id_bm' at row 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 134 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 326 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 18 	  function : INSERT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 22:30:05]
+SQL : INSERT INTO draws_ssc_bet (bet_status,result_status,id_bm,id_mm,id_sc,id_co,id_sa,id_ag,id_mem,order_ip,time_bet,time_bet_ms,rpt_date,date_sn,ptype,item_type,item,even_code,gold,odds_set,odds_basis,odds_gap,odds_adjust,odds_adjust_auto,odds_adjust_auto_rep,share_mm,share_sc,share_co,share_sa,share_ag,water_basis,water_gap_mm,water_gap_sc,water_gap_co,water_gap_sa,water_gap_ag,water_gap_mem,share_gold_mm,share_gold_sc,share_gold_co,share_gold_sa,share_gold_ag,share_gold_mm_out,share_gold_sc_out,share_gold_co_out,share_gold_sa_out,share_gold_ag_out,share_gold_mm_in,share_gold_sc_in,share_gold_co_in,share_gold_sa_in,share_gold_ag_in,water_gold_mm,water_gold_sc,water_gold_co,water_gold_sa,water_gold_ag,water_gold_mem,win_gold_mem) VALUES('N','U','999','1','2','3','4','5','6','127.0.0.1','2017-09-27 22:30:05','200','2017-09-27','1','100','I','1','','100','A','9.911','0','0','0','0','20','15','25','20','20','85','0','2','','4','5','0','2000','1500','2500','2000','2000','0','0','0','0','0','0','0','0','0','0','99.11','79.11','69.11','59.11','49.11','99.11','99.11')
+00000  
+Exception:{"errorInfo":["HY000",1366,"Incorrect integer value: '' for column 'water_gap_co' at row 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 134 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 337 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 18 	  function : INSERT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-09-27 22:35:34]
+SQL : INSERT INTO draws_ssc_bet (bet_status,result_status,id_bm,id_mm,id_sc,id_co,id_sa,id_ag,id_mem,order_ip,time_bet,time_bet_ms,rpt_date,date_sn,ptype,item_type,item,even_code,gold,odds_set,odds_basis,odds_gap,odds_adjust,odds_adjust_auto,odds_adjust_auto_rep,share_mm,share_sc,share_co,share_sa,share_ag,water_basis,water_gap_mm,water_gap_sc,water_gap_co,water_gap_sa,water_gap_ag,water_gap_mem,share_gold_mm,share_gold_sc,share_gold_co,share_gold_sa,share_gold_ag,share_gold_mm_out,share_gold_sc_out,share_gold_co_out,share_gold_sa_out,share_gold_ag_out,share_gold_mm_in,share_gold_sc_in,share_gold_co_in,share_gold_sa_in,share_gold_ag_in,water_gold_mm,water_gold_sc,water_gold_co,water_gold_sa,water_gold_ag,water_gold_mem,win_gold_mem) VALUES('N','U','999','1','2','3','4','5','6','127.0.0.1','2017-09-27 22:35:34','200','2017-09-27','1','100','I','1','','100','A','99110','0','0','0','0','20','15','25','20','20','85','0','2','','4','5','0','2000','1500','2500','2000','2000','0','0','0','0','0','0','0','0','0','0','991100','991080','991070','991060','991050','991100','991100')
+00000  
+Exception:{"errorInfo":["HY000",1366,"Incorrect integer value: '' for column 'water_gap_co' at row 1"]}
+SCRIPT_NAME:/php_redis/lib/test.redis_PDO.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 134 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 337 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 18 	  function : INSERT_test2 	 
+ file : /home/user/web/php_redis/lib/test.redis_PDO.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)

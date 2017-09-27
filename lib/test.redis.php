@@ -2,8 +2,16 @@
 include_once('class.redis.php');
 include_once('../conf/sys_config.php');
 //建立 redis 簡單連線
-$redis=mke_redis_link($db_set);
-//test_set();
+$redis=mke_redis_link($redis_set);
+test_set();
+test_get();
+//test_fork_redis_set();
+//test_fork_redis_get();
+//test_fork_redis_del();
+//test_multi_redis_set();
+//test_multi_redis_get();
+//test_multi_redis_del();
+//set key val
 /*
 	新增
 	它的機制是 
@@ -20,8 +28,7 @@ function test_set(){
 	$json=json_encode($hset);
 	$redis->php_redis_set('hset',$json);
 }
-
-//test_get();
+//get key val
 /*
 	查詢
 	hset 這個KEY 裡面的值
@@ -32,7 +39,7 @@ function test_get(){
 	$ret=json_decode($json,true);
 	print_r($ret);
 }
-//test_del();
+//del key val
 /*
 	刪除
 	hset 這個KEY 裡面的值
@@ -41,12 +48,6 @@ function test_del(){
 	global $redis;
 	$redis->php_redis_del('hset');
 }
-//test_fork_redis_set();
-//test_fork_redis_get();
-//test_fork_redis_del();
-//test_multi_redis_set();
-//test_multi_redis_get();
-//test_multi_redis_del();
 //
 function test_fork_redis_set(){
 	global $redis;
@@ -92,6 +93,7 @@ function test_fork_redis_set(){
 		exit(0);
 	}
 }
+//
 function test_fork_redis_get(){
 	global $redis;
 	$max=6;

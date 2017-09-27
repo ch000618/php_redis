@@ -2,7 +2,7 @@
 include_once('class.redis.php');
 include_once('../conf/redis_connect.php');
 //建立 redis 簡單連線
-$redis=mke_redis_link($db_set);
+$redis=mke_redis_link($redis_set);
 echo '<pre>';
 init();
 echo '</pre>';
