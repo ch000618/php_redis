@@ -1,48 +1,66 @@
 <?php
-include_once('class.redis.php');
-include_once('../conf/sys_config.php');
-//建立 redis 簡單連線
-$redis=mke_redis_link($red_set);
 init();
 function init(){
-	//這裡是接收需求端
-	/*
-		mod=命令 
-	*/
-	$mod=$_GET['mod'];
-	switch($mod){
-		case 'set':
-			init_set();
-			break;
-		case 'get':
-			init_get();
-			break;
-		case 'del':
-			init_del();
-			break;
+	$url_list=array();
+	for($i=1;$i<=250;$i++){
+		$url_list[$i]['url']="http://192.168.1.190/php_redis/lib/test.redis_PDO.php";
+		$url_list[$i]['post'][0]['ptype']=200;
+		$url_list[$i]['post'][0]['item']=1;
+		$url_list[$i]['post'][0]['gold']=10;
 	}
+	//print_r($url_list);
+	//exit;
+	test_sand_curl($url_list);
 }
-function init_set(){
-	global $redis;
-	$key=$_POST['key'];
-	$val=$_POST['val'];
-	$json=json_encode($val);
-	if($json==''){return;}
-	$ret=$redis->php_redis_set($key,$json);
-	echo $ret;
-}
-function init_get(){
-	global $redis;
-	$key=$_POST['key'];
-	if($key==''){return;}
-	$ret=$redis->php_redis_get($key);
-	echo json_decode($ret,true);
-}
-function init_del(){
-	global $redis;
-	$key=$_POST['key'];
-	if($key==''){return;}
-	$ret=$redis->php_redis_del($key);
-	echo $ret;
+//多執行緒執行redis 送post 
+/*
+*/
+
+function test_sand_curl($url_list){
+	$debug=false;
+	$ret=array();
+	$handle  = array();
+	$mh = curl_multi_init();
+	$hosts=array();
+	$i = 0;
+	$running = 0;
+	foreach($url_list as $k => $data) {
+		$url=$data['url'];
+		$POST=$data['post'];
+		$ch = curl_init();
+		$user_agent="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36";
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_NOBODY, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 0);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($POST));
+		curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
+		curl_multi_add_handle($mh, $ch);
+		$handle[$i++] = $ch;
+	}
+	if($debug){echo "do{}while()\n";}
+	/* 執行CURL */
+	do{
+    curl_multi_exec($mh, $running);
+    curl_multi_select($mh);
+  } while ($running > 0);
+	echo "<pre>";
+	foreach($handle as $k =>$ch) {
+		$content  = curl_multi_getcontent($ch);
+		//$contents[$k] = (curl_errno($ch) == 0) ? $content : false;
+		echo "$k : $content ";
+	}
+	echo "</pre>";
+	/* 移除 handle*/
+	foreach($handle as $i =>$ch) {
+		curl_multi_remove_handle($mh, $ch);
+	}
+  curl_multi_close($mh);
+	/*echo '<xmp>';
+	print_r($contents);
+	echo '</xmp>';
+	*/
 }
 ?>
