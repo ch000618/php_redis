@@ -3,10 +3,10 @@ init();
 function init(){
 	$url_list=array();
 	for($i=1;$i<=250;$i++){
-		$url_list[$i]['url']="http://192.168.1.190/php_redis/lib/test.redis_PDO.php";
+		$url_list[$i]['url']="http://192.168.1.190/php_redis/lib/test.redis_PDO.php?c=1";
 		$url_list[$i]['post'][0]['ptype']=200;
 		$url_list[$i]['post'][0]['item']=1;
-		$url_list[$i]['post'][0]['gold']=10;
+		$url_list[$i]['post'][0]['gold']=1000;
 	}
 	//print_r($url_list);
 	//exit;
@@ -50,7 +50,7 @@ function test_sand_curl($url_list){
 	foreach($handle as $k =>$ch) {
 		$content  = curl_multi_getcontent($ch);
 		//$contents[$k] = (curl_errno($ch) == 0) ? $content : false;
-		echo "$k : $content ";
+		echo "$k : $content \n";
 	}
 	echo "</pre>";
 	/* 移除 handle*/
