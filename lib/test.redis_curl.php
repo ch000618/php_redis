@@ -1,22 +1,20 @@
 <?php
-init();
-function init(){
+
+init_multi_order();
+function init_multi_order(){
 	$url_list=array();
 	for($i=1;$i<=250;$i++){
 		$url_list[$i]['url']="http://192.168.1.190/php_redis/lib/test.redis_PDO.php?c=1";
 		$url_list[$i]['post'][0]['ptype']=200;
-		$url_list[$i]['post'][0]['item']=1;
+		$url_list[$i]['post'][0]['item']=4;
 		$url_list[$i]['post'][0]['gold']=1000;
 	}
-	//print_r($url_list);
-	//exit;
-	test_sand_curl($url_list);
+	multi_order($url_list);
 }
 //多執行緒執行redis 送post 
 /*
 */
-
-function test_sand_curl($url_list){
+function multi_order($url_list){
 	$debug=false;
 	$ret=array();
 	$handle  = array();
@@ -33,7 +31,6 @@ function test_sand_curl($url_list){
 		curl_setopt($ch, CURLOPT_NOBODY, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 0);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($POST));
 		curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
@@ -49,7 +46,6 @@ function test_sand_curl($url_list){
 	echo "<pre>";
 	foreach($handle as $k =>$ch) {
 		$content  = curl_multi_getcontent($ch);
-		//$contents[$k] = (curl_errno($ch) == 0) ? $content : false;
 		echo "$k : $content \n";
 	}
 	echo "</pre>";
@@ -58,9 +54,5 @@ function test_sand_curl($url_list){
 		curl_multi_remove_handle($mh, $ch);
 	}
   curl_multi_close($mh);
-	/*echo '<xmp>';
-	print_r($contents);
-	echo '</xmp>';
-	*/
 }
 ?>

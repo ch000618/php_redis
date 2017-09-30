@@ -182,8 +182,9 @@ class php_redis{
 	*將資料庫名稱 跟 資料表 跟條件式 彙整成key 值
 	*將資料轉成json 
 	*再將 key 和 資料寫進 redis
+	*170930 新增 設定到期時間 不設定就是永久存在  有設定的話到期就消失了
 	*/
-	function set_row($sTable,$aWhere,$aData){
+	function set_row($sTable,$aWhere,$aData,$expire_time=false){
     $sMdb_name=$this->db_mysql;
 		$sRet=0;
 		if($sMdb_name==''){return $sRet;}
@@ -200,6 +201,9 @@ class php_redis{
 		$sKey=implode('#',$aKeys);
 		$json=json_encode($aData,true);
 		$sRet=$this->php_redis_set($sKey,$json);
+		if($expire_time!=false){
+			$q=$this->php_redis_expire($sKey,$expire_time);
+		}
 		return $sRet;
 	}
 	//取出redis 

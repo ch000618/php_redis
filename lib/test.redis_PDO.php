@@ -2,17 +2,20 @@
 include_once('class.redis.php');
 include_once('class.db.PDO.php');
 include_once('../conf/sys_config.php');
+//print_r($redis_set);
 //建立 redis 簡單連線
 $redis=mke_redis_link($redis_set);
 $db=mke_pdo_link($insert_db);
 $db_s=mke_pdo_link($select_db);
-$cmd=$_GET['c'];
+init();
+function init(){
+	$cmd=$_GET['c'];
 	switch($cmd){
 		case 1:
-			init();
+			init_order();
 			break;
 		case 2:
-			init2();
+			init_select();
 			break;
 		default:
 			echo '<pre>';
@@ -21,8 +24,9 @@ $cmd=$_GET['c'];
 			echo '</pre>';
 			break;
 	}
+}
 //init();
-function init(){
+function init_order(){
 	$aOrder=$_POST;
 	if(empty($aOrder)){return ;}
 	$oOrder=new test_order();
@@ -31,8 +35,15 @@ function init(){
 	echo "ok!";
 }
 
-function init2(){
-	$monit=SELECT_test3();
+function init_select(){
+	$sGame='ssc';
+	$ulv='ag';
+	$uid='25';
+	$sRpt_date='2017-09-28';
+	$iDate_sn='12';
+	$iPtype='200';
+	
+	$monit=select_order($sGame,$sRpt_date,$iDate_sn,$iPtype,$ulv,$uid);
 	echo '<pre>';
 	print_r($monit);
 	echo '</pre>';
@@ -47,6 +58,7 @@ var	$aFabric_id=array();
 var	$aFabric_set=array();
 var	$aPlay_set=array();
 var	$aMem_set=array();
+var	$aMem_data=array();
 var	$dws=array();
 	function __construct(){
 	}
@@ -57,13 +69,13 @@ var	$dws=array();
 	}
 	//假資料
 	function test_Fabric_data(){
-		$this->aFabric_id['bmid']=999;
-		$this->aFabric_id['mmid']=1;
-		$this->aFabric_id['scid']=12;
-		$this->aFabric_id['coid']=13;
-		$this->aFabric_id['said']=14;
-		$this->aFabric_id['agid']=15;
-		$this->aFabric_id['memid']=16;
+		$this->aFabric_id['id_bm']=999;
+		$this->aFabric_id['id_mm']=1;
+		$this->aFabric_id['id_sc']=22;
+		$this->aFabric_id['id_co']=23;
+		$this->aFabric_id['id_sa']=24;
+		$this->aFabric_id['id_ag']=25;
+		$this->aMem_data['id']=26;
 		foreach($this->aOrder as $k => $v){
 			$iPtype=$v['ptype'];
 			$this->aFabric_set['mm'][$iPtype]['share']=20;
@@ -209,19 +221,19 @@ var	$dws=array();
 		$sSQL_v="('[".implode("]','[",$aCol)."]')";
 		$sSQL_i='INSERT INTO draws_ssc_bet ('.implode(',',$aCol).') VALUES';
 		$order_ip='127.0.0.1';
-		//$db->beginTransaction();//交易機制開始
+		$db->beginTransaction();//交易機制開始
 		foreach($this->aOrder as $k => $v){
 			$valueSQL=$sSQL_v;
 			$value=$init_value;//初始化值陣列
 			$value['bet_status']='N';
 			$value['result_status']='U';
-			$value['id_bm']=$this->aFabric_id['bmid'];
-			$value['id_mm']=$this->aFabric_id['mmid'];
-			$value['id_sc']=$this->aFabric_id['scid'];
-			$value['id_co']=$this->aFabric_id['coid'];
-			$value['id_sa']=$this->aFabric_id['said'];
-			$value['id_ag']=$this->aFabric_id['agid'];
-			$value['id_mem']=$this->aFabric_id['memid'];
+			$value['id_bm']=$this->aFabric_id['id_bm'];
+			$value['id_mm']=$this->aFabric_id['id_mm'];
+			$value['id_sc']=$this->aFabric_id['id_sc'];
+			$value['id_co']=$this->aFabric_id['id_co'];
+			$value['id_sa']=$this->aFabric_id['id_sa'];
+			$value['id_ag']=$this->aFabric_id['id_ag'];
+			$value['id_mem']=$this->aMem_data['id'];
 			$value['order_ip']=$order_ip;
 			$value['time_bet']=date('Y-m-d H:i:s');
 			$value['time_bet_ms']=200;
@@ -286,33 +298,38 @@ var	$dws=array();
 		}
 		$sSQL=$sSQL_i.(implode(',',$valueSQLs));
 		$db->sql_query($sSQL);
-		//$db->commit();//交易機制結束
-		/*$sTable='test2'; 
-		foreach($aFabric_id as $k => $v){
-			$aWhere=array(
-				$k=>$v
-			);
-			$redis->del_row($sTable,$aWhere);
-		}
-		*/
+		$db->commit();//交易機制結束
 	}
 }
 
-function SELECT_test3(){
+function select_order_v2($sGame,$sRpt_date,$iDate_sn,$iPtype,$ulv,$uid){
   global $db_s;
   global $redis;
 	$aRet=array();
 	$aTmp=array();
-	$ulv='mm';
-	$lv_next='sc';
-	$sGame='ssc';
-	/*
-	$sTable='test2'; 
+	$_aLevel=array('bm','mm','sc','co','sa','ag');
+	$ulv=strtolower($ulv);
+	
+  $aLevel=$_aLevel;
+  $aLevel_index=array_flip($_aLevel);
+  $iLv=$aLevel_index[$ulv];
+  $lv_next=($ulv=='ag')?'mem':$aLevel[$iLv+1];
+	
+	$sTable='draws_[game]_bet';
+	$sId_lv='[lv]_id';
+	$sId_lv=str_replace('[lv]',$ulv,$sId_lv);
+	$sTable=str_replace('[game]',$sGame,$sTable);
 	$aWhere=array(
-		'mmid'=>1
+		$sId_lv=>$uid
+		,'rpt_date'=>$sRpt_date
+		,'date_sn'=>$iDate_sn
+		,'ptype'=>$iPtype
 	);
 	$cahce=$redis->get_row($sTable,$aWhere);
-	*/
+	if(!empty($cahce)){
+		$aRet=$cahce;
+		return $aRet;
+	}
 	//把公視轉換成代數的方式
 	$share_gold='CAST(share_gold_[lv] AS SIGNED)-CAST(share_gold_[lv]_out AS SIGNED)+CAST(share_gold_[lv]_in AS SIGNED)';
 	$share='(CAST(share_gold_[lv] AS SIGNED)-CAST(share_gold_[lv]_out AS SIGNED)+CAST(share_gold_[lv]_in AS SIGNED)
@@ -346,18 +363,21 @@ function SELECT_test3(){
 	$aSQL[]='*(([odds])*0.0001))';
 	$aSQL[]='AS fake_win_gold';
 	$aSQL[]='FROM `draws_[game]_bet`';
-	$aSQL[]='force index(mm_drwas)';
+	$aSQL[]='force index([lv]_drwas)';
 	$aSQL[]='WHERE 1';
 	$aSQL[]="AND bet_status = 'N'";
-	$aSQL[]='AND rpt_date ="2017-09-28"';
-	$aSQL[]='AND date_sn="12"';
-	$aSQL[]='AND ptype="200"';
-	$aSQL[]='AND id_mm="1"';
-	//$aSQL[]='GROUP BY item';
+	$aSQL[]='AND id_[lv]=[lv_id]';
+	$aSQL[]='AND rpt_date ="[rpt_date]"';
+	$aSQL[]='AND date_sn="[date_sn]"';
+	$aSQL[]='AND ptype="[ptype]"';
 	$sSQL=implode(' ',$aSQL);
 	$sSQL=str_replace('[game]',$sGame,$sSQL);
 	$sSQL=str_replace('[lv]',$ulv,$sSQL);
+	$sSQL=str_replace('[lv_id]',$uid,$sSQL);
 	$sSQL=str_replace('[lv_next]',$lv_next,$sSQL);
+	$sSQL=str_replace('[rpt_date]',$sRpt_date,$sSQL);
+	$sSQL=str_replace('[date_sn]',$iDate_sn,$sSQL);
+	$sSQL=str_replace('[ptype]',$iPtype,$sSQL);
 	$sSQL=str_replace('[share_gold]',$share_gold,$sSQL);
 	$sSQL=str_replace('[share]',$share,$sSQL);
 	$sSQL=str_replace('[water_next]',$water_next,$sSQL);
@@ -385,7 +405,6 @@ function SELECT_test3(){
 	}
 	foreach($aTmp as $iPtype => $aItme){
 		foreach($aItme as $sItme => $val){
-			//$aRet[$sItme]['ptype']=$iPtype;
 			$aRet[$sItme]['cnt']=count($val['GOLD']);
 			$aRet[$sItme]['GOLD']=array_sum($val['GOLD']);
 			$aRet[$sItme]['share_out']=array_sum($val['share_out']);
@@ -396,24 +415,37 @@ function SELECT_test3(){
 			$aRet[$sItme]['fake_win_gold']=array_sum($val['fake_win_gold']);
 		}
 	}
-	//$redis->set_row($sTable,$aWhere,$aRet);
+	$redis->set_row($sTable,$aWhere,$aRet,60);
 	return $aRet;
 }
-function SELECT_test2(){
+function select_order($sGame,$sRpt_date,$iDate_sn,$iPtype,$ulv,$uid){
   global $db_s;
   global $redis;
 	$aRet=array();
 	$aTmp=array();
-	$ulv='mm';
-	$lv_next='sc';
-	$sGame='ssc';
-	/*
-	$sTable='test2'; 
+	$_aLevel=array('bm','mm','sc','co','sa','ag');
+	$ulv=strtolower($ulv);
+	
+  $aLevel=$_aLevel;
+  $aLevel_index=array_flip($_aLevel);
+  $iLv=$aLevel_index[$ulv];
+  $lv_next=($ulv=='ag')?'mem':$aLevel[$iLv+1];
+	
+	$sTable='draws_[game]_bet';
+	$sId_lv='[lv]_id';
+	$sId_lv=str_replace('[lv]',$ulv,$sId_lv);
+	$sTable=str_replace('[game]',$sGame,$sTable);
 	$aWhere=array(
-		'mmid'=>1
+		$sId_lv=>$uid
+		,'rpt_date'=>$sRpt_date
+		,'date_sn'=>$iDate_sn
+		,'ptype'=>$iPtype
 	);
 	$cahce=$redis->get_row($sTable,$aWhere);
-	*/
+	if(!empty($cahce)){
+		$aRet=$cahce;
+		return $aRet;
+	}
 	//把公視轉換成代數的方式
 	$share_gold='CAST(share_gold_[lv] AS SIGNED)-CAST(share_gold_[lv]_out AS SIGNED)+CAST(share_gold_[lv]_in AS SIGNED)';
 	$share='(CAST(share_gold_[lv] AS SIGNED)-CAST(share_gold_[lv]_out AS SIGNED)+CAST(share_gold_[lv]_in AS SIGNED)
@@ -448,18 +480,22 @@ function SELECT_test2(){
   $aSQL[]='*[odds]*0.0001';
   $aSQL[]=') AS fake_win_gold';
 	$aSQL[]='FROM `draws_[game]_bet`';
-	$aSQL[]='force index(mm_drwas)';
+	$aSQL[]='force index([lv]_drwas)';
 	$aSQL[]='WHERE 1';
 	$aSQL[]="AND bet_status = 'N'";
-	$aSQL[]='AND rpt_date ="2017-09-28"';
-	$aSQL[]='AND date_sn="12"';
-	$aSQL[]='AND ptype="200"';
-	$aSQL[]='AND id_mm="1"';
+	$aSQL[]='AND id_[lv]=[lv_id]';
+	$aSQL[]='AND rpt_date ="[rpt_date]"';
+	$aSQL[]='AND date_sn="[date_sn]"';
+	$aSQL[]='AND ptype="[ptype]"';
 	$aSQL[]='GROUP BY item';
 	$sSQL=implode(' ',$aSQL);
 	$sSQL=str_replace('[game]',$sGame,$sSQL);
 	$sSQL=str_replace('[lv]',$ulv,$sSQL);
+	$sSQL=str_replace('[lv_id]',$uid,$sSQL);
 	$sSQL=str_replace('[lv_next]',$lv_next,$sSQL);
+	$sSQL=str_replace('[rpt_date]',$sRpt_date,$sSQL);
+	$sSQL=str_replace('[date_sn]',$iDate_sn,$sSQL);
+	$sSQL=str_replace('[ptype]',$iPtype,$sSQL);
 	$sSQL=str_replace('[share_gold]',$share_gold,$sSQL);
 	$sSQL=str_replace('[share]',$share,$sSQL);
 	$sSQL=str_replace('[water_next]',$water_next,$sSQL);
@@ -467,17 +503,13 @@ function SELECT_test2(){
 	$sSQL=str_replace('[odds]',$odds,$sSQL);
 	$sSQL=str_replace('[gold]',$gold,$sSQL);
 	$sSQL=str_replace('[share_out]',$share_out,$sSQL);
-	/*
-	echo "<pre> ";
-	echo $sSQL." \n ";
-	echo "</pre> ";
-	*/
 	$q=$db_s->sql_query($sSQL);
 	while($r=$db_s->nxt_row('ASSOC')){
     $item=$r['item'];
     unset($r['item']);
     $aRet[$item]=$r;
 	}
+	$redis->set_row($sTable,$aWhere,$aRet,60);
 	return $aRet;
 }
 
