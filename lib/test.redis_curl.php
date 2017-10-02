@@ -3,8 +3,8 @@
 init_multi_order();
 function init_multi_order(){
 	$url_list=array();
-	for($i=1;$i<=250;$i++){
-		$url_list[$i]['url']="http://192.168.1.190/php_redis/lib/test.redis_PDO.php?c=1";
+	for($i=1;$i<=50;$i++){
+		$url_list[$i]['url']="http://192.168.1.190/php_redis/lib/test.order.php";
 		$url_list[$i]['post'][0]['ptype']=203;
 		$url_list[$i]['post'][0]['item']=6;
 		$url_list[$i]['post'][0]['gold']=1000;

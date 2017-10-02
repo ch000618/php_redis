@@ -1,0 +1,32 @@
+
+[2017-10-02 11:56:12]
+SQL : SELECT max(id) as last_id FROM `draws_[game]_bet`
+42S02 1146 Table 'test.draws_[game]_bet' doesn't exist
+Exception:{"errorInfo":["42S02",1146,"Table 'test.draws_[game]_bet' doesn't exist"]}
+SCRIPT_NAME:/php_redis/lib/test.mke_monitor_cache.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 62 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 27 	  function : ser_get_max_bet_id 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 13 	  function : make_monit_risk_gold_cache 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-10-02 11:56:39]
+SQL : SELECT max(id) as last_id FROM `draws_ssc_bet`
+42S22 1054 Unknown column 'id' in 'field list'
+Exception:{"errorInfo":["42S22",1054,"Unknown column 'id' in 'field list'"]}
+SCRIPT_NAME:/php_redis/lib/test.mke_monitor_cache.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 63 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 27 	  function : ser_get_max_bet_id 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 13 	  function : make_monit_risk_gold_cache 	 
+$_GET:array (
+)
+$_POST:array (
+)
