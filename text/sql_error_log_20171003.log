@@ -1,0 +1,34 @@
+
+[2017-10-03 11:39:21]
+SQL : SELECT cnt(sn) as cnt FROM draws_ssc_bet AND bet_status = 'N' AND result_status = 'U' AND rpt_date ="2017-09-28" AND date_sn="12"
+42000 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND bet_status = 'N' AND result_status = 'U' AND rpt_date ="2017-09-28" AND date' at line 1
+Exception:{"errorInfo":["42000",1064,"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND bet_status = 'N' AND result_status = 'U' AND rpt_date =\"2017-09-28\" AND date' at line 1"]}
+SCRIPT_NAME:/php_redis/lib/test.mke_monitor_cache.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 130 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 58 	  function : ser_get_bet_cnt 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 16 	  function : make_monit_risk_gold_cache 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)
+
+[2017-10-03 11:40:05]
+SQL : SELECT cnt(sn) as cnt FROM draws_ssc_bet WHERE 1 AND bet_status = 'N' AND result_status = 'U' AND rpt_date ="2017-09-28" AND date_sn="12"
+42000 1370 execute command denied to user 'fst_rst_r'@'localhost' for routine 'test.cnt'
+Exception:{"errorInfo":["42000",1370,"execute command denied to user 'fst_rst_r'@'localhost' for routine 'test.cnt'"]}
+SCRIPT_NAME:/php_redis/lib/test.mke_monitor_cache.php
+ bug_trace start :
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 124 	  function : errorstatus 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/class.db.PDO.php 	  line : 90 	  function : exec_sql 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 131 	  function : sql_query 	  class : db_PDO 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 58 	  function : ser_get_bet_cnt 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 16 	  function : make_monit_risk_gold_cache 	 
+ file : /home/user/web/php_redis/lib/test.mke_monitor_cache.php 	  line : 12 	  function : init 	 
+$_GET:array (
+)
+$_POST:array (
+)

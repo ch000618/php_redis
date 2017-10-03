@@ -4,7 +4,6 @@ error_reporting(E_ERROR);
 include_once('class.redis.php');
 include_once('class.db.PDO.php');
 include_once('../conf/sys_config.php');
-//print_r($redis_set);
 //建立 redis 簡單連線
 $redis=mke_redis_link($redis_set);
 $db=mke_pdo_link($insert_db);
@@ -13,8 +12,8 @@ init_select();
 
 function init_select(){
 	$sGame='ssc';
-	$ulv='sc';
-	$uid='52';
+	$ulv='co';
+	$uid='53';
 	$sRpt_date='2017-09-28';
 	$iDate_sn='12';
 	$iPtype='203';
@@ -47,7 +46,8 @@ function monit_get_risk_gold_v3($sGame,$sRpt_date,$iDate_sn,$iPtype,$ulv,$uid){
 	$sId_lv=str_replace('[lv]',$ulv,$sId_lv);
 	$sTable=str_replace('[game]',$sGame,$sTable);
 	$aWhere=array(
-		$sId_lv=>$uid
+		'risk_gold'
+		,$sId_lv=>$uid
 		,'rpt_date'=>$sRpt_date
 		,'date_sn'=>$iDate_sn
 		,'ptype'=>$iPtype
@@ -164,7 +164,8 @@ function monit_get_risk_gold_v2($sGame,$sRpt_date,$iDate_sn,$iPtype,$ulv,$uid){
 	$sId_lv=str_replace('[lv]',$ulv,$sId_lv);
 	$sTable=str_replace('[game]',$sGame,$sTable);
 	$aWhere=array(
-		$sId_lv=>$uid
+		'risk_gold'
+		,$sId_lv=>$uid
 		,'rpt_date'=>$sRpt_date
 		,'date_sn'=>$iDate_sn
 		,'ptype'=>$iPtype

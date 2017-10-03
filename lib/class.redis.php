@@ -316,6 +316,9 @@ class php_redis{
 		$redis
 */
 function mke_redis_link($db_set){
+	if(!class_exists('Redis')){
+		return false;
+	}
 	$redis=new php_redis($db_set['host'],$db_set['port'],$db_set['db_rds'],$db_set['db_mysql']);
 	//有設密碼的機器 設定這個欄位不能是空的 否則不會去做驗證
 	if($db_set['pass']!='' || !isset($db_set['pass'])){
