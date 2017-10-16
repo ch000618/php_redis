@@ -15,6 +15,7 @@
 		 'host'=ip
 		,'port'=埠號
 		,'db_rds'= redis 資料庫
+		,'rds_enabled'= redis是否啟用 站台設置
 		,'db_mysql'= mysql 資料庫
 		,'pass'= 密碼(沒有就給空字串)
   );
@@ -46,7 +47,8 @@ class php_redis{
 	private $connection='';//連線
 	private $debug=false;//debug 模式
   private $db_mysql = '';//對應的mysql資料庫
-  private $redis_multi = 0;//對應的mysql資料庫
+  private $redis_enabled = '';//redis是否啟用 站台設置
+  private $redis_multi = 0;
 	private $error_code=array(
 		 'no_conn'		=>0
 		,'conn_ok'		=>1
@@ -64,6 +66,9 @@ class php_redis{
 		$host=$this->host;
 		$port=$this->port;
 		if(!class_exists('Redis')){
+			return $this->status_code;
+		}
+		if($this->redis_enabled==0){
 			return $this->status_code;
 		}
 		$this->connection = $this->link->connect($host,$port);
@@ -93,11 +98,12 @@ class php_redis{
 		return $status;
 	}
 	// 建構子
-	function  __construct($host,$port,$db_redis,$db_mysql){
+	function  __construct($host,$port,$db_redis,$db_mysql,$redis_enabled){
 		if($host!=''){$this->host=$host;}
 		if($port!=''){$this->port=$port;}
 		if($db_redis!=''){$this->db=$db_redis;}
 		if($db_mysql!=''){$this->db_mysql=$db_mysql;}
+		if($redis_enabled!=''){$this->redis_enabled=$redis_enabled;}
 		if(!class_exists('Redis')){
 			return $this->status_code;
 		}
@@ -130,7 +136,7 @@ class php_redis{
 	//啟動交易模式
 	function php_redis_multi(){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return ;}
+		if($r!=true){return 0;}
 		$this->link->multi(Redis::MULTI);
 	}
 	//將value存入 某個key
@@ -141,7 +147,7 @@ class php_redis{
 	*/
 	function php_redis_set($key,$val){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$result=$this->link->set($key,$val);
 		return $result;
 	}
@@ -154,7 +160,7 @@ class php_redis{
 	*/
 	function php_redis_get($key){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$result=$this->link->get($key);
 		return $result;
 	}
@@ -165,7 +171,7 @@ class php_redis{
 	*/
 	function php_redis_del($key){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$result=$this->link->del($key);
 		return $result;
 	}
@@ -177,7 +183,7 @@ class php_redis{
 	*/
 	function php_redis_expire($key,$time){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$this->link->expire($key,$time);
 		$result=$this->link->TTL($key);
 		return $result;
@@ -286,35 +292,35 @@ class php_redis{
 	*/
 	function php_redis_lrange($key,$start,$end){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$result=$this->link->lrange($key,$start,$end);
 		return $result;
 	}
 	//将一个值value插入到列表key的表头，不存在就创建 
 	function php_redis_rpush($key,$val){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$result=$this->link->rpush($key,$val);
 		return $result;
 	}
 	//将一个值value插入到列表key的表头，不存在就创建 
 	function php_redis_lpush($key,$val){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$result=$this->link->lpush($key,$val);
 		return $result;
 	}
 	//改，从表头数，将列表key下标为第index的元素的值为new_v
 	function php_redis_lset($key,$index,$new_v){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$result=$this->link->lset($key,$index,$new_v);
 		return $result;
 	}
 	//查，返回列表key中，下标为index的元素
 	function php_redis_lindex($key,$index){
 		$r=$this->php_redis_chk_status();
-		if($r!=true){return false;}
+		if($r!=true){return 0;}
 		$result=$this->link->lindex($key,$index);
 		return $result;
 	}
@@ -339,7 +345,7 @@ class php_redis{
 		$redis
 */
 function mke_redis_link($db_set){
-	$redis=new php_redis($db_set['host'],$db_set['port'],$db_set['db_rds'],$db_set['db_mysql']);
+	$redis=new php_redis($db_set['host'],$db_set['port'],$db_set['db_rds'],$db_set['db_mysql'],$db_set['rds_enabled']);
 	//有設密碼的機器 設定這個欄位不能是空的 否則不會去做驗證
 	if($db_set['pass']!='' || !isset($db_set['pass'])){
 		$redis->php_redis_auth($db_set['pass']);
