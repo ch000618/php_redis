@@ -133,6 +133,9 @@ class php_redis{
 		if(!class_exists('Redis')){
 			return $this->status_code;
 		}
+		if($this->redis_enabled==0){
+			return $this->status_code;
+		}
 		$db=$this->db;
 		$this -> link -> SELECT($db);
 	}
