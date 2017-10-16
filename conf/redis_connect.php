@@ -4,7 +4,7 @@ $redis_set=array(
 	'host'=>'192.168.1.190'
 	,'port'=>6379
 	,'db_rds'=>0
-	,'rds_enabled'=>1
+	,'rds_enabled'=>0
 	,'db_mysql'=>'test'
 	,'pass'=>'1234'
 );
