@@ -304,7 +304,7 @@ class php_redis{
 		$sRet=$this->php_redis_del($sKey);
 		return $sRet;
 	}
-		//取得某個key 的列表
+	//取得某個key 的列表
 	/*
 		如果這個key 是一個列表就要
 		用這種方式
@@ -318,28 +318,28 @@ class php_redis{
 		$result=$this->link->lrange($key,$start,$end);
 		return $result;
 	}
-	//将一个值value插入到列表key的表头，不存在就创建 
+	//將一个或多个值 value 插入到列表 key 的表尾
 	function php_redis_rpush($key,$val){
 		$r=$this->php_redis_chk_status();
 		if($r!=true){return 0;}
 		$result=$this->link->rpush($key,$val);
 		return $result;
 	}
-	//将一个值value插入到列表key的表头，不存在就创建 
+	//將一个或多个值 value 插入到列表 key 的表頭
 	function php_redis_lpush($key,$val){
 		$r=$this->php_redis_chk_status();
 		if($r!=true){return 0;}
 		$result=$this->link->lpush($key,$val);
 		return $result;
 	}
-	//改，从表头数，将列表key下标为第index的元素的值为new_v
-	function php_redis_lset($key,$index,$new_v){
+	//從列表開頭數過來 將列表key中index的元素改為new_val
+	function php_redis_lset($key,$index,$new_val){
 		$r=$this->php_redis_chk_status();
 		if($r!=true){return 0;}
-		$result=$this->link->lset($key,$index,$new_v);
+		$result=$this->link->lset($key,$index,$new_val);
 		return $result;
 	}
-	//查，返回列表key中，下标为index的元素
+	//返回列表key中index的元素
 	function php_redis_lindex($key,$index){
 		$r=$this->php_redis_chk_status();
 		if($r!=true){return 0;}
