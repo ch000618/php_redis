@@ -136,14 +136,30 @@ class php_redis{
 		if($this->redis_enabled==0){
 			return $this->status_code;
 		}
-		$db=$this->db;
-		$this -> link -> SELECT($db);
+		try{
+			$this -> link -> SELECT($db);
+		}catch(exception $e){
+			$this->status_code=2;
+		}
 	}
 	//啟動交易模式
 	function php_redis_multi(){
 		$r=$this->php_redis_chk_status();
 		if($r!=true){return 0;}
 		$this->link->multi(Redis::MULTI);
+	}
+	//取得 某些key 
+	/*
+		傳入 
+			$sKey=要查詢 的key名 
+		回傳
+			$result=結果
+	*/
+	function php_redis_keys($sKey='*'){
+		$r=$this->php_redis_chk_status();
+		if($r!=true){return 0;}
+		$result=$this->link->keys($sKey);
+		return $result;
 	}
 	//將value存入 某個key
 	/*

@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ERROR);
 include_once('class.redis.php');
 include_once('class.db.PDO.php');
-include_once('../conf/sys_config.php');
+include_once('../config/sys_config.php');
 //print_r($redis_set);
 //建立 redis 簡單連線
 $redis=mke_redis_link($redis_set);

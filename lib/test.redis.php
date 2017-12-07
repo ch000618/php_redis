@@ -1,6 +1,6 @@
 <?php
 include_once('class.redis.php');
-include_once('../conf/sys_config.php');
+include_once('../config/sys_config.php');
 //建立 redis 簡單連線
 $redis=mke_redis_link($redis_set);
 test_set();
